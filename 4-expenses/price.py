@@ -1,4 +1,4 @@
-sum = input("Введите сумму: ").strip()
+sum = input("Введите сумму: ").strip().lower()
 
 if len(sum.split()) == 2:
     integer = sum.split()[0]
