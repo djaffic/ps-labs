@@ -34,7 +34,7 @@ def get_average(expenses):
 def print_report(expenses):
     """Функция для вывода расходов"""
 
-    return f"{expenses} | {get_total} | {get_average}"
+    return f"{expenses} | {get_total(expenses)} | {get_average(expenses)}"
 
 
 print(expenses_type)
@@ -44,9 +44,11 @@ while True:
 
     match user_choice:
         case "Добавить расход":
-            add_expense(expenses, 1000)
+            value = int(input("Введите значение расхода: "))
+            add_expense(expenses, value)
             print(expenses)
         case "Удалить расход по номеру":
+            index = int(input("Введите значение индекса удаляемого расхода: "))
             delete_expense(expenses, 3)
             print(expenses)
         case "Показать все расходы":
