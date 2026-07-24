@@ -1,33 +1,60 @@
+expenses = [100, 200, 300, 400, 500, 600, 700]
+
+expenses_type = ["Добавить расход", "Показать все расходы",
+                 "Показать средний расход", "Удалить расход по номеру", "Выход"]
+
+
+def add_expense(expenses, value):
+    """Функция для добавления расходов"""
+
+    expenses.append(value)
+    return expenses
+
+
+def delete_expense(expenses, index):
+    """Функция для удаления расхода по индексу"""
+
+    del expenses[index]
+    return expenses
+
+
+def get_total(expenses):
+    """Функция для расчета общей суммы расходов"""
+
+    return sum(expenses)
+
+
+def get_average(expenses):
+    """Функция для расчета среднего у расходов"""
+
+    avg = sum(expenses) / len(expenses)
+    return avg
+
+
+def print_report(expenses):
+    """Функция для вывода расходов"""
+
+    return f"{expenses} | {get_total} | {get_average}"
+
+
+print(expenses_type)
 
 while True:
-    print("Добавить расход")
-    print ("Показать все расходы")
-    print("Показать сумму и средний расход")
-    print("Удалить расход по номеру")
-    print("Выход")
     user_choice = input("Выберите один из вариантов: ")
-    if user_choice == "Выход":
-        print("Выходим из программы")
-        break
 
-
-
-# sum = input("Введите сумму: ").strip().lower()
-
-# if len(sum.split()) == 2:
-#     integer = sum.split()[0]
-#     rub = sum.split()[1]
-#     if integer.isdigit() and rub == "руб":
-#         print(f"{int(integer):.2f} ₽")
-# elif len(sum.split()) == 4:
-#     integer = sum.split()[0]
-#     rub = sum.split()[1]
-#     fractional = sum.split()[2]
-#     kop = sum.split()[3]
-#     if integer.isdigit() and fractional.isdigit() and rub == "руб" and kop == "коп":
-#         if len(fractional) == 1:
-#             print(f"{integer}.0{fractional} ₽")
-#         elif len(fractional) == 2:
-#             print(f"{integer}.{fractional} ₽")
-# else:
-#     print("Некорректный формат суммы")
+    match user_choice:
+        case "Добавить расход":
+            add_expense(expenses, 1000)
+            print(expenses)
+        case "Удалить расход по номеру":
+            delete_expense(expenses, 3)
+            print(expenses)
+        case "Показать все расходы":
+            print(get_total(expenses))
+        case "Показать средний расход":
+            print(get_average(expenses))
+        case "Напечатать отчёт":
+            print_report(expenses)
+        case _:
+            print("Выходим из программы")
+            break
