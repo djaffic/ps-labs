@@ -1,18 +1,28 @@
-books = {"Евгений Онегин": "Пушкин", "Капитанская дочка": "Пушкин", "Руслан и Людмила": "Пушкин", "Шурале": "Тукай", "Водяная": "Тукай", "Сказка о козе и баране": "Тукай"}
+
+import sys
+
+choosen_method = sys.argv[1]
+filter_option = sys.argv[2]
+
+books = {"Евгений Онегин": "Пушкин", "Капитанская дочка": "Пушкин", "Руслан и Людмила": "Пушкин",
+         "Шурале": "Тукай", "Водяная": "Тукай", "Сказка о козе и баране": "Тукай"}
+
+if choosen_method == "filter":
+    filtered = dict(
+        filter(lambda item: item[1] == filter_option, books.items()))
+
+    print(list(map(lambda item: f"{item[0]} - {item[1]}", filtered.items())))
 
 
-print("Название книг".ljust(30), "|", "Автор")
-print("-"*40)
-set_of_book = set()
-for book, author in books.items():
-    print(book.ljust(30), "|", author)
+else:
+    formatted_list = list(
+        map(lambda item: f"{item[0]} — {item[1]}", books.items()))
 
-set_of_book.update(books)
-
-uniq_authors = set()
-print("Список всех произведений: ", set_of_book)
-
-for author in books.values():
-    uniq_authors.add(author)
-
-print(uniq_authors)
+    if choosen_method == "sort" and filter_option == "author":
+        sorted_by_author = sorted(
+            formatted_list, key=lambda x: x.split(" — ")[1])
+        print(sorted_by_author)
+    elif choosen_method == "sort" and filter_option == "book":
+        sorted_by_book = sorted(
+            formatted_list, key=lambda x: x.split(" — ")[0])
+        print(sorted_by_book)
